@@ -30,25 +30,49 @@ namespace CMP1903M_Assessment_1_Base_Code
                     string human_input = Physinput.manualTextInput();
                     Console.WriteLine(human_input);
 
-                    // Calls the Analyse class with the intention of using analysing the input
+                    // Calls the Analyse class with the intention of analysing the human input
+                    string sentence_check = human_input; //Human_input becomes the value of the sentence_check variable to be used in the Analysis class
                     Analyse Analysetext = new Analyse();
-                    Analysetext.analyse_humantext(ref human_input); //Calls the analyse_humantext method within the class with human_input as the parameter
+                    int[] sentence_result = Analysetext.analyse_main(ref sentence_check); //Calls the analyse_humantext method within the class with human_input as the parameter
 
+                    //Calls the report class with the intention of outputting a final report of the findings from the analysis
+                    Report result_report = new Report();
+                    result_report.main_report(ref sentence_result);
+
+                    //Calls the FileStore class with the intention of checking for long words and storing them into a txt file
+                    FileStore files = new FileStore();
+                    files.long_word_checker(ref sentence_check);
                 }
                 else if (option == "2")
                 {
                     Console.WriteLine("Selected via text file");
                     checker = 1;
                     Input File_Input = new Input(); //Calls the input class with the intention of using the file input
+                    string file_name = " ";
+                    string file_path = File_Input.file_Text_Input(ref file_name);
+
+                    //Calls the Analyse class with the intention of analysing the inputted text file 
+                    string sentence_check = file_path;
+                    Analyse Analysetext = new Analyse();
+                    int[] sentence_result = Analysetext.analyse_main(ref sentence_check);
+
+                    //Calls the report class with the intention of outputting a final report of the findings from the analysis
+                    Report result_report = new Report();
+                    result_report.main_report(ref sentence_result);
+
+                    //Calls the FileStore class with the intention of checking for long words and storing them into a txt file
+                    FileStore files = new FileStore();
+                    files.long_word_checker(ref sentence_check);
+
                 }
                 else 
                 {
                     Console.WriteLine("Invalid input");
                     continue;
                 }
-                    
-                
+                                
             }
+            Console.WriteLine("\n"+"The Program ran successfully");
             
 
             //Create 'Input' object

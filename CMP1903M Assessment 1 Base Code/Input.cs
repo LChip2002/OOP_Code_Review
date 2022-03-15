@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace CMP1903M_Assessment_1_Base_Code
 {
@@ -10,7 +11,7 @@ namespace CMP1903M_Assessment_1_Base_Code
     public class Input
     {
         //Handles the text input for Assessment 1
-        string text = "nothing";
+        //string text = "nothing";
         
         
         //Method: manualTextInput
@@ -34,10 +35,14 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Returns: string
         //Gets text input from a .txt file
         //Processes Input from the Text File
-        public string fileTextInput(string fileName)
+        public string file_Text_Input(ref string file_name)
         {
+            //Sets the contents of the directory to a string
+            string file_path = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\CMP1903M Assessment 1 Test File.txt");
+            Console.WriteLine(file_path);
+            return file_path;      
 
-            return text;
+            //return text;
         }
 
     }

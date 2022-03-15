@@ -7,34 +7,45 @@ using System.Threading.Tasks;
 namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Analyse
-    {
-        //Handles the analysis of text
-        //Method: analyseText
-        //Arguments: string
-        //Returns: list of integers
-        //Calculates and returns an analysis of the text
-
-        //Method that takes in the input and analyses the text 
-        public void analyse_humantext(ref string human_input) 
+    {     
+        //Method that takes in the input and gets the number of letters and characters from the input
+        public int[] analyse_main(ref string sentence_check) 
         {
-            int human_input_length = human_input.Length;
+            int human_input_length = sentence_check.Length;
             Console.WriteLine("There are"+" "+human_input_length+" "+ "characters in this sentence");
-            Console.WriteLine(human_input[0]);
 
             // Removes the spaces in between the words by concatonating the words together
-            string trimmed_human_input = String.Concat(human_input.Where(c => !Char.IsWhiteSpace(c)));
-            Console.WriteLine(trimmed_human_input);
+            string trimmed_input = String.Concat(sentence_check.Where(c => !Char.IsWhiteSpace(c)));
 
             //Works out and outputs the amount of letters there are in the inputted sentence(s)
-            int input_letter_count = trimmed_human_input.Length;
+            int input_letter_count = trimmed_input.Length;
             Console.WriteLine("There are" + " " + input_letter_count + " " + "letters in this sentence");
 
-            string sentence_check = human_input; //Human_input becomes the value of the sentence_check variable to be used in the sentence_statistics method
-            sentence_statistics(ref sentence_check); //Calls the sentence_statistics method with sentence_check as a parameter
+            //Calls the sentence_statistics method with sentence_check as a parameter
+            int[] return_array = this.sentence_statistics(ref sentence_check); 
+            Console.WriteLine(return_array.Length); //Gets the length of the array
+
+            //Resizes the array and adds the value of the sentence_count method to the return_array list
+            int new_length = return_array.Length + 1;
+            Array.Resize(ref return_array, new_length); //Changes the size of the array to allow for another value to be added to it
+
+            //Calls the sentence_counter method and places it in the array
+            return_array[new_length-1] = this.sentence_count(ref sentence_check); 
+            Console.WriteLine(return_array.Length);
+
+
+            //For loop prints out each value in the array
+            for (int i = 0; i < return_array.Length; i++) 
+            {
+                Console.WriteLine("Return array:" + return_array[i]);
+            }
+
+            //Returns the array with the results of the analysis
+            return return_array;            
         }
 
-        //Method that analyses the sentence and returns number of vowels, constants, upper and lower case, etc. 
-        public void sentence_statistics(ref string sentence_check) 
+        //Method that analyses the sentence and returns number of vowels, constants, upper and lower case, etc and returns a list. 
+        public int[] sentence_statistics(ref string sentence_check) 
         {
             //Variables and lists that will be used to analyse the file or user input
             char[] vowels = { 'a', 'e', 'i', 'o', 'u' }; //Stores the vowels  
@@ -98,13 +109,13 @@ namespace CMP1903M_Assessment_1_Base_Code
             Console.WriteLine("Number of Uppercase letters:" + " " + upper_counter);
             Console.WriteLine("Number of Lowercase letters:" + " "+ lower_counter);
 
-            //Calls the sentence_counter method 
-            sentence_counter(ref sentence_check);        
-
+            //An array that contains the counters is created and return to the analyse_main method in the Analyse class
+            int[] counters = { vowel_counter, consonants_counter, number_counter, space_counter, other_characters_counter, upper_counter, lower_counter};
+            return counters;
         }
 
         //Method counts how many sentences there are in the input
-        public void sentence_counter(ref string sentence_check)
+        public int sentence_count(ref string sentence_check)
         {
             int sentence_counter = 0;//Counter for the number of sentences in the input
 
@@ -112,14 +123,23 @@ namespace CMP1903M_Assessment_1_Base_Code
             for (int i =0; i < sentence_check.Length; i++) 
             {
                 //If statement to check if the sentence contains punctuation that typically ends a sentence
-                if (sentence_check.Contains('.') || sentence_check.Contains('?') || sentence_check.Contains('!')) // || = OR Statement
+                if (sentence_check[i] == '.' || sentence_check[i] == '?' || sentence_check[i] == '!') // || = OR Statement
                 {
                     sentence_counter += 1;
-                }
-                Console.WriteLine("Number of sentences:"+" "+sentence_counter);
+                }                
             }
-            
+            Console.WriteLine("Number of sentences:" + " " + sentence_counter); //Outputs the number of sentences
+            return sentence_counter; //Returns the sentence_counter variable to the analyse_main method in the Analyse class
+
         }
+
+        //Original Method Template - ignore as didn't use
+
+        //Handles the analysis of text
+        //Method: analyseText
+        //Arguments: string
+        //Returns: list of integers
+        //Calculates and returns an analysis of the text
         public List<int> analyseText(string input)
         {
             //List of integers to hold the first five measurements:
