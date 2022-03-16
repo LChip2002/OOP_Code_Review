@@ -19,12 +19,29 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Returns: string
         //Gets text input from the keyboard
         //Processes Human Input
-        public string manualTextInput()
+        public string manualTextInput(ref string human_input)
         {
+            
             Console.WriteLine("Enter a sentence, make sure to finish the input with an asterick (*)");
-            string humaninput = Console.ReadLine(); //Stores the user input into this variable
-            Console.WriteLine(humaninput);
-            return humaninput;
+            human_input = Console.ReadLine(); //Stores the user input into this variable
+            int asterick_counter = 0; //Counter to check if an asterick is present in the inputted sentence
+            
+            for (int i = 0; i < human_input.Length; i++) 
+            {
+                if(human_input[i] == '*') 
+                {
+                    asterick_counter += 1;
+                }
+            }
+            //If statement checks if the asterick counter isn't greater than 0
+            if (asterick_counter == 0) 
+            {
+                human_input = " ";
+                manualTextInput(ref human_input); //Function is called again if there are no astericks - example of recursion
+            }
+            
+            Console.WriteLine(human_input);
+            return human_input;
             
             
             //return text;

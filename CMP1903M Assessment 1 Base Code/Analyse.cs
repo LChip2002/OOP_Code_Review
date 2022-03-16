@@ -11,6 +11,11 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Method that takes in the input and gets the number of letters and characters from the input
         public int[] analyse_main(ref string sentence_check) 
         {
+            //Removes all characters from the input after an asterick(*) has been found
+            sentence_check = sentence_check.Remove(sentence_check.IndexOf("*") + 1); //Removes everything after the index location of the first asterick
+            Console.WriteLine(sentence_check);
+
+            //Gets the amount of characters from the whole sentence including spaces
             int human_input_length = sentence_check.Length;
             Console.WriteLine("There are"+" "+human_input_length+" "+ "characters in this sentence");
 
@@ -31,9 +36,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             //Calls the sentence_counter method and places it in the array
             return_array[new_length-1] = this.sentence_count(ref sentence_check); 
-            Console.WriteLine(return_array.Length);
-
-
+            
             //For loop prints out each value in the array
             for (int i = 0; i < return_array.Length; i++) 
             {
@@ -91,11 +94,11 @@ namespace CMP1903M_Assessment_1_Base_Code
             //For loop works out how many upper and lower case letters there are in the sentence
             for (int i = 0; i < sentence_check.Length; i++) 
             {
-                if (sentence_check[i] >= 65 && sentence_check[i] <= 90) //If statement checks if character is same as upper character
+                if (sentence_check[i] >= 65 && sentence_check[i] <= 90) //If statement checks if character's ASCII value is the same as upper character
                 {
                     upper_counter += 1;
                 }
-                else if (sentence_check[i] >= 97 && sentence_check[i] <= 122) //If statement checks if character is same as lower character
+                else if (sentence_check[i] >= 97 && sentence_check[i] <= 122) //If statement checks if character's ASCII value is the is same as lower character
                 {
                     lower_counter += 1;
                 }

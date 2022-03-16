@@ -25,13 +25,14 @@ namespace CMP1903M_Assessment_1_Base_Code
                 {
                     Console.WriteLine("Selected via keyboard");
                     checker = 1;
+                    string human_input = " "; //Initializes the human input as a blank
                     //Calls the input class with the intention of using the physical input
                     Input Physinput = new Input();
-                    string human_input = Physinput.manualTextInput();
-                    Console.WriteLine(human_input);
+                    string returned_human_input = Physinput.manualTextInput(ref human_input);
+                    Console.WriteLine(returned_human_input);
 
                     // Calls the Analyse class with the intention of analysing the human input
-                    string sentence_check = human_input; //Human_input becomes the value of the sentence_check variable to be used in the Analysis class
+                    string sentence_check = returned_human_input; //Human_input becomes the value of the sentence_check variable to be used in the Analysis class
                     Analyse Analysetext = new Analyse();
                     int[] sentence_result = Analysetext.analyse_main(ref sentence_check); //Calls the analyse_humantext method within the class with human_input as the parameter
 
