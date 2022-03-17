@@ -12,7 +12,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Handles the reporting of the analysis
         //Maybe have different methods for different formats of output?
         //eg.   public void outputConsole(List<int>)
-        public void main_report(ref int[] sentence_result) 
+        public void main_report(ref List<int> sentence_result) 
         {
             //Outputs the stats of the sentence
             string[] stat_options = {"vowels","consonants","integers","spaces"
@@ -24,12 +24,12 @@ namespace CMP1903M_Assessment_1_Base_Code
             try 
             {
                 //For loop that will output to console with values from analysis
-                for (int i = 0; i < sentence_result.Length; i++)
+                for (int i = 0; i < sentence_result.Count; i++)
                 {
                     Console.WriteLine("Number of" + " " + stat_options[x] + ":" + " " + sentence_result[i]);
 
                     //If statement used to move on the stat_options so it matches the value of the sentence_result 
-                    if (x < sentence_result.Length) 
+                    if (x < sentence_result.Count) 
                     {
                         x += 1;
                     }                    

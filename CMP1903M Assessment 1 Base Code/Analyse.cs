@@ -7,9 +7,35 @@ using System.Threading.Tasks;
 namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Analyse
-    {     
+    {   
+        //Handles the analysis of text
+        //Method: analyseText
+        //Arguments: string
+        //Returns: list of integers
+        //Calculates and returns an analysis of the text
+
+        //Method refers to the analyse_main to be able to convert return_array to a list
+        private List<int> analyseText(ref int[] return_array)
+        {
+            //List of integers to hold the first five measurements:
+            //1. Number of sentences
+            //2. Number of vowels
+            //3. Number of consonants
+            //4. Number of upper case letters
+            //5. Number of lower case letters
+
+            List<int> values = new List<int>(); //Initializes a new list 
+
+            //Adds every value in the array to values list
+            for (int i = 0; i < return_array.Length; i++)
+            {
+                values.Add(return_array[i]); //Adds element of array to list
+            }
+            return values;
+        }
+
         //Method that takes in the input and gets the number of letters and characters from the input
-        public int[] analyse_main(ref string sentence_check) 
+        public List<int> analyse_main(ref string sentence_check) 
         {
             //Removes all characters from the input after an asterick(*) has been found
             sentence_check = sentence_check.Remove(sentence_check.IndexOf("*") + 1); //Removes everything after the index location of the first asterick
@@ -35,20 +61,24 @@ namespace CMP1903M_Assessment_1_Base_Code
             Array.Resize(ref return_array, new_length); //Changes the size of the array to allow for another value to be added to it
 
             //Calls the sentence_counter method and places it in the array
-            return_array[new_length-1] = this.sentence_count(ref sentence_check); 
+            return_array[new_length-1] = this.sentence_count(ref sentence_check); //Calls the sentence_count method and set the output as an element to the return_array
             
             //For loop prints out each value in the array
             for (int i = 0; i < return_array.Length; i++) 
             {
                 Console.WriteLine("Return array:" + return_array[i]);
             }
+            //Calls function that will convert the array to a list and generate the expected output from this class
+            List<int> return_list = analyseText(ref return_array);
 
-            //Returns the array with the results of the analysis
-            return return_array;            
+            //Returns the list with the results of the analysis
+            return return_list;            
         }
 
         //Method that analyses the sentence and returns number of vowels, constants, upper and lower case, etc and returns a list. 
-        public int[] sentence_statistics(ref string sentence_check) 
+        //Declared as private as only needed to be accessed by analyse_main method in this class and nowhere else
+        //Example of Encapsulation
+        private int[] sentence_statistics(ref string sentence_check) 
         {
             //Variables and lists that will be used to analyse the file or user input
             char[] vowels = { 'a', 'e', 'i', 'o', 'u' }; //Stores the vowels  
@@ -118,7 +148,9 @@ namespace CMP1903M_Assessment_1_Base_Code
         }
 
         //Method counts how many sentences there are in the input
-        public int sentence_count(ref string sentence_check)
+        //Declared as private as only needed to be accessed by analyse_main method in this class and nowhere else
+        //Example of Encapsulation
+        private int sentence_count(ref string sentence_check)
         {
             int sentence_counter = 0;//Counter for the number of sentences in the input
 
@@ -134,30 +166,6 @@ namespace CMP1903M_Assessment_1_Base_Code
             Console.WriteLine("Number of sentences:" + " " + sentence_counter); //Outputs the number of sentences
             return sentence_counter; //Returns the sentence_counter variable to the analyse_main method in the Analyse class
 
-        }
-
-        //Original Method Template - ignore as didn't use
-
-        //Handles the analysis of text
-        //Method: analyseText
-        //Arguments: string
-        //Returns: list of integers
-        //Calculates and returns an analysis of the text
-        public List<int> analyseText(string input)
-        {
-            //List of integers to hold the first five measurements:
-            //1. Number of sentences
-            //2. Number of vowels
-            //3. Number of consonants
-            //4. Number of upper case letters
-            //5. Number of lower case letters
-            List<int> values = new List<int>();
-            //Initialise all the values in the list to '0'
-            for(int i = 0; i<5; i++)
-            {
-                values.Add(0);
-            }
-            return values;
         }
     }
 }

@@ -20,8 +20,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Gets text input from the keyboard
         //Processes Human Input
         public string manualTextInput(ref string human_input)
-        {
-            
+        {            
             Console.WriteLine("Enter a sentence, make sure to finish the input with an asterick (*)");
             human_input = Console.ReadLine(); //Stores the user input into this variable
             int asterick_counter = 0; //Counter to check if an asterick is present in the inputted sentence

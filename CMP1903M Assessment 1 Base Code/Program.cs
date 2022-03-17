@@ -34,7 +34,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                     // Calls the Analyse class with the intention of analysing the human input
                     string sentence_check = returned_human_input; //Human_input becomes the value of the sentence_check variable to be used in the Analysis class
                     Analyse Analysetext = new Analyse();
-                    int[] sentence_result = Analysetext.analyse_main(ref sentence_check); //Calls the analyse_humantext method within the class with human_input as the parameter
+                    List<int> sentence_result = Analysetext.analyse_main(ref sentence_check); //Calls the analyse_humantext method within the class with human_input as the parameter
 
                     //Calls the report class with the intention of outputting a final report of the findings from the analysis
                     Report result_report = new Report();
@@ -55,11 +55,16 @@ namespace CMP1903M_Assessment_1_Base_Code
                     //Calls the Analyse class with the intention of analysing the inputted text file 
                     string sentence_check = file_path;
                     Analyse Analysetext = new Analyse();
-                    int[] sentence_result = Analysetext.analyse_main(ref sentence_check);
+                    List<int> sentence_result = Analysetext.analyse_main(ref sentence_check);
 
                     //Calls the report class with the intention of outputting a final report of the findings from the analysis
                     Report result_report = new Report();
                     result_report.main_report(ref sentence_result);
+
+                    //Calls the Report_Validation class with the purpose of comparing the statistics from the final report to those in the original input
+                    //Only in option == '2', as this class requires the text file and not the human input
+                    Report_Validation Validate = new Report_Validation();
+                    Validate.Stat_Comparison(ref sentence_result, ref file_path);
 
                     //Calls the FileStore class with the intention of checking for long words and storing them into a txt file
                     FileStore files = new FileStore();
