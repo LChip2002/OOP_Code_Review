@@ -15,7 +15,19 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             string[] sentence_words = sentence_check.Split(' '); //Each individual word is now an individual item in an array
             string[] long_words = new string[sentence_words.Length]; //Declares an empty string list
-            string keyboard_symbols = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\Keyboard Symbols.txt"); //Gets keyboard characters from the text file
+            string keyboard_symbols; //Declares the string variable so can be used in local try catch scope as well as in the scope of the method
+            //Exception handling used here in case the full file directory is not present in the user's device
+            try 
+            {
+                //Gets keyboard characters from the text file
+                keyboard_symbols = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\Keyboard_Symbols.png"); 
+            }
+            catch (Exception) 
+            {
+                Console.WriteLine("Original directory doesn't exist on device, searching for file now");
+                keyboard_symbols = symbol_file_search(); //Calls file search function
+            }
+           
             int word = 0; //Used as an index for the for loop and as counter for number of long words
             
             //For loop to convert the contents of keyboard_symbols into an array to be used
@@ -71,6 +83,16 @@ namespace CMP1903M_Assessment_1_Base_Code
             }
             Console.WriteLine("Long Word File Successfully Created");
             return;
+        }
+
+        //Method searches for the text file on the user's device
+        private string symbol_file_search() 
+        {
+            //Gets the full directory that the file is in on the user's device
+            string keyboard_symbols = System.IO.File.ReadAllText(Path.GetFullPath("Keyboard_Symbols.txt"));
+            Console.WriteLine(keyboard_symbols);
+            return keyboard_symbols;
+
         }
     }
 }

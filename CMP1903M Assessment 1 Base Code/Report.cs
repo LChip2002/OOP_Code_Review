@@ -40,7 +40,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 //Typically the error from this was an index error, this will be printed onto the console
                 //Original error was solved as length of sentence_result and stat_options didn't match
                 //Able to solve by remembering to add another value to the stat_options array
-                Console.WriteLine("Error: Index out of range");
+                Console.WriteLine("Program Error (index): Report failed due to issue from development"); //Prints out statement that the user would understand  
             }
             return; //Return back to main program 
 

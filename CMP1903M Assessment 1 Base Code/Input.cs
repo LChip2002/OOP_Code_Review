@@ -8,6 +8,7 @@ using System.IO;
 namespace CMP1903M_Assessment_1_Base_Code
 {
     //Class that handles the input from user and text file
+    //Get either manually entered text, or text from a file
     public class Input
     {
         //Handles the text input for Assessment 1
@@ -40,8 +41,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             }
             
             Console.WriteLine(human_input);
-            return human_input;
-            
+            return human_input;            
             
             //return text;
         }
@@ -53,12 +53,31 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Processes Input from the Text File
         public string file_Text_Input(ref string file_name)
         {
-            //Sets the contents of the directory to a string
-            string file_path = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\CMP1903M Assessment 1 Test File.txt");
-            Console.WriteLine(file_path);
-            return file_path;      
+            //Exception handling used here in case the full directory is not present on the user's device
+            try
+            {
+                //Sets the contents of the directory to a string
+                string file_path = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\CMP1903M_Assessment_1_Test_File.txt");
+                return file_path;
+            }
 
-            //return text;
+            catch (Exception)
+            {
+                Console.WriteLine("Original directory doesn't exist on device, searching for file now");
+                string file_path = file_search();
+                return file_path;
+            }
+                  
+        }
+
+        //Method searches for the text file on the user's device
+        private string file_search() 
+        {
+            //Gets the full directory that the file is in on the user's device
+            string file_path = System.IO.File.ReadAllText(Path.GetFullPath("CMP1903M_Assessment_1_Test_File.txt")); 
+            Console.WriteLine(file_path);
+            return file_path;
+            
         }
 
     }
