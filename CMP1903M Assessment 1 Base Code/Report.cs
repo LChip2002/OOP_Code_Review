@@ -12,7 +12,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         // Handles the reporting of the analysis
         // Maybe have different methods for different formats of output?
         // eg.   public void outputConsole(List<int>)
-        public void main_report(ref List<int> sentence_result) 
+        public void main_report(ref List<int> sentence_result, ref string sentence_check) 
         {
             // Outputs the stats of the sentence
             string[] stat_options = {"vowels","consonants","integers","spaces"
@@ -31,8 +31,14 @@ namespace CMP1903M_Assessment_1_Base_Code
                     x += 1;
                 }                    
             }
-            
-            
+
+            // Calls the Analyse class to obtain the value returned from the letter frequency method
+            // Calls function that will calculate which letter/character appears the most in the input
+            // Console output will come from the Analysis class method
+            Analyse letter_freq = new Analyse();
+            letter_freq.letter_frequency(ref sentence_check); // Calls letter_frequency function in Analyse class   
+
+
 
         }
 

@@ -55,19 +55,16 @@ namespace CMP1903M_Assessment_1_Base_Code
             // Calls the sentence_statistics method with sentence_check as a parameter
             int[] return_array = this.sentence_statistics(ref sentence_check); 
             Console.WriteLine(return_array.Length); // Gets the length of the array
-
+            /*
             // Resizes the array and adds the value of the sentence_count method to the return_array list
             int new_length = return_array.Length + 1;
             Array.Resize(ref return_array, new_length); // Changes the size of the array to allow for another value to be added to it
 
             // Calls the sentence_counter method and places it in the array
             return_array[new_length-1] = this.sentence_count(ref sentence_check); // Calls the sentence_count method and set the output as an element to the return_array
-            
+            */
             // Calls function that will convert the array to a list and generate the expected output from this class
             List<int> return_list = Array_to_list(ref return_array);
-
-            // Calls function that will calculate which letter/character appears the most in the input
-            string frequency = letter_frequency(ref sentence_check);
 
             // Returns the list with the results of the analysis
             return return_list;            
@@ -132,17 +129,11 @@ namespace CMP1903M_Assessment_1_Base_Code
                     lower_counter += 1;
                 }
             }
-            // Outputs the stats of the sentence
-            Console.WriteLine("Number of vowels: " + vowel_counter);
-            Console.WriteLine("Number of consonants: " + consonants_counter);
-            Console.WriteLine("Number of integers: " + number_counter);
-            Console.WriteLine("Number of spaces: " + space_counter);
-            Console.WriteLine("Number of other characters: " + other_characters_counter);
-            Console.WriteLine("Number of Uppercase letters: " + upper_counter);
-            Console.WriteLine("Number of Lowercase letters: " + lower_counter);
+
+            int sentence_counter = this.sentence_count(ref sentence_check); // Calls the sentence_count method and set the output as an element to the return_array
 
             // An array that contains the counters is created and return to the analyse_main method in the Analyse class
-            int[] counters = { vowel_counter, consonants_counter, number_counter, space_counter, other_characters_counter, upper_counter, lower_counter};
+            int[] counters = { vowel_counter, consonants_counter, number_counter, space_counter, other_characters_counter, upper_counter, lower_counter, sentence_counter};
             return counters;
         }
 
@@ -162,35 +153,44 @@ namespace CMP1903M_Assessment_1_Base_Code
                     sentence_counter += 1;  
                 }                
             }
-            Console.WriteLine("Number of sentences: " + sentence_counter); // Outputs the number of sentences
-            return sentence_counter; // Returns the sentence_counter variable to the analyse_main method in the Analyse class
+            // Returns the sentence_counter variable to the analyse_main method in the Analyse class    
+            return sentence_counter; 
 
         }
         // TO ADD: Get the frequency of individual letters?
-        private string letter_frequency(ref string sentence_check) 
+        // Gets the letters and characters that are in the input and checks how frequently they appear
+        public dynamic letter_frequency(ref string sentence_check) 
         {
-            string xy = "x";
             // New dictionary created that will be the host to all letters and characters that will be checked for.
-            Dictionary<char, int> individual_letters = new Dictionary<char, int>();
+            Dictionary<char, int> individual_letters_dict = new Dictionary<char, int>();
 
             // For loop used to add the entire alphabet to the dictionary
             for(char x = ' '; x <= '~'; x++) 
             {
-                individual_letters.Add(x, 0);
+                individual_letters_dict.Add(x, 0);
             }
 
-            // For loop to check each character in the input and count the
-            for (int i = 0; i < sentence_check.Length; i++) 
-            {
-                if (individual_letters.TryGetValue(sentence_check[i], out int indiv_letter_count))
+            // For loop to check each character in the input and count the number of times that each letter is used in the input
+            for (int i = 0; i < sentence_check.Length; i++)
+            {           
+                // If statement used to get and check the value of the current character in the input and see if the value is in the dictionary and get that value
+                if (individual_letters_dict.TryGetValue(sentence_check[i], out int indiv_letter_count))
                 {
-                    individual_letters[sentence_check[i]] = indiv_letter_count + 1;
-                }
-                
+                    individual_letters_dict[sentence_check[i]] = indiv_letter_count + 1; // Adds 1 to the current dictionary value 
+                }                
             }
-                      
 
-            return xy;
+            //Sorts the dictionary to show the Top 6 characters in the input
+            var sorted_dictionary = new Dictionary<char,int>(from entry in individual_letters_dict orderby entry.Value descending select entry).Take(6);
+            
+            //Prints out ordered dictionary values
+            for (int i = 0; i < sorted_dictionary.Count(); i++)
+            {
+                Console.WriteLine("Character: {0} Amount {1}", sorted_dictionary.ElementAt(i).Key, sorted_dictionary.ElementAt(i).Value);
+            }
+
+            //Returns the sorted dictionary with the letters and the amount of times they were used.
+            return sorted_dictionary;
         }
 
     }

@@ -38,7 +38,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                     // Calls the report class with the intention of outputting a final report of the findings from the analysis
                     Report result_report = new Report();
-                    result_report.main_report(ref sentence_result);
+                    result_report.main_report(ref sentence_result, ref sentence_check);
 
                     // Calls the FileStore class with the intention of checking for long words and storing them into a txt file
                     FileStore files = new FileStore();
@@ -58,7 +58,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                     // Calls the report class with the intention of outputting a final report of the findings from the analysis
                     Report result_report = new Report();
-                    result_report.main_report(ref sentence_result);
+                    result_report.main_report(ref sentence_result, ref sentence_check);
 
                     // Calls the Report_Validation class with the purpose of comparing the statistics from the final report to those in the original input
                     // Only in option == '2', as this class requires the text file and not the human input
