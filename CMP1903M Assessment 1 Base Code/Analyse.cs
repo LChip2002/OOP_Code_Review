@@ -39,30 +39,11 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             // Removes all characters from the input after an asterisk(*) has been found
             sentence_check = sentence_check.Remove(sentence_check.IndexOf("*") + 1); // Removes everything after the index location of the first asterisk
-            Console.WriteLine(sentence_check);
-
-            // Gets the amount of characters from the whole sentence including spaces
-            int human_input_length = sentence_check.Length;
-            Console.WriteLine("There are "+human_input_length+ " characters in this sentence");
-
-            // Removes the spaces in between the words by concatonating the words together
-            string trimmed_input = String.Concat(sentence_check.Where(c => !Char.IsWhiteSpace(c)));
-
-            // Works out and outputs the amount of letters there are in the inputted sentence(s)
-            int input_letter_count = trimmed_input.Length;
-            Console.WriteLine("There are " + input_letter_count + " letters in this sentence");
+            Console.WriteLine(sentence_check);            
 
             // Calls the sentence_statistics method with sentence_check as a parameter
             int[] return_array = this.sentence_statistics(ref sentence_check); 
-            Console.WriteLine(return_array.Length); // Gets the length of the array
-            /*
-            // Resizes the array and adds the value of the sentence_count method to the return_array list
-            int new_length = return_array.Length + 1;
-            Array.Resize(ref return_array, new_length); // Changes the size of the array to allow for another value to be added to it
-
-            // Calls the sentence_counter method and places it in the array
-            return_array[new_length-1] = this.sentence_count(ref sentence_check); // Calls the sentence_count method and set the output as an element to the return_array
-            */
+            
             // Calls function that will convert the array to a list and generate the expected output from this class
             List<int> return_list = Array_to_list(ref return_array);
 
@@ -90,7 +71,25 @@ namespace CMP1903M_Assessment_1_Base_Code
             int other_characters_counter = 0;
             int upper_counter = 0;
             int lower_counter = 0;
-            
+
+            // Removes the spaces in between the words by concatonating the words together
+            string trimmed_input = String.Concat(sentence_check.Where(c => !Char.IsWhiteSpace(c)));
+
+            // Works out and outputs the amount of characters without spaces are in the inputted sentence(s)
+            int input_letter_count = trimmed_input.Length;
+
+            // For loop to remove all punctuation and asterisks to get a more accurate character count
+            for (int x = 0; x < input_letter_count; x++) 
+            {
+                Console.WriteLine(trimmed_input[x]);
+                if (trimmed_input[x] == '.' || trimmed_input[x] == ',' || trimmed_input[x] == '*' || trimmed_input[x] == '?' || trimmed_input[x] == '!') 
+                {
+                    Console.WriteLine(trimmed_input[x]);
+                    input_letter_count -= 1;
+                }
+            }
+            Console.WriteLine(trimmed_input);
+
             // For loop works out number of vowels, consonants, numbers and other symbols in the sentence(s)
             for (int i = 0; i < sentence_check.Length; i++)
             {
@@ -133,7 +132,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             int sentence_counter = this.sentence_count(ref sentence_check); // Calls the sentence_count method and set the output as an element to the return_array
 
             // An array that contains the counters is created and return to the analyse_main method in the Analyse class
-            int[] counters = { vowel_counter, consonants_counter, number_counter, space_counter, other_characters_counter, upper_counter, lower_counter, sentence_counter};
+            int[] counters = { input_letter_count, vowel_counter, consonants_counter, number_counter, space_counter, other_characters_counter, upper_counter, lower_counter, sentence_counter};
             return counters;
         }
 

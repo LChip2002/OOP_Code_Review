@@ -15,7 +15,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         public void main_report(ref List<int> sentence_result, ref string sentence_check) 
         {
             // Outputs the stats of the sentence
-            string[] stat_options = {"vowels","consonants","integers","spaces"
+            string[] stat_options = {"total characters","vowels","consonants","integers","spaces"
                     ,"Other characters","Uppercase letters","Lowercase Letters","Sentences" +
                     "" }; 
             int x = 0; // Extra increment for for loop
