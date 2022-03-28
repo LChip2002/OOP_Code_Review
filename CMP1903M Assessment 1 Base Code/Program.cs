@@ -19,11 +19,11 @@ namespace CMP1903M_Assessment_1_Base_Code
                 Console.Write("Do you want to enter text " + "\n" + "1. Via keyboard" + "\n" + "2. Via text file" + "\n" + "Or press enter to quit");
                 var option = Console.ReadLine(); // The option the user chooses is set to a variable
                 Input Program_Input = new Input(); // Input object instantiated, will be used in calling methods within the Input class
-
+                Console.Clear();
                 // If statement that will allow the user to respond and navigate to what input they want to use
                 if (option == "1")
                 {
-                    Console.WriteLine("Selected enter via keyboard.");
+                    Console.WriteLine("Selected enter via keyboard."+"\n");
                     checker = true;
                     string human_input = " "; // Initializes the human input as a blank
             
@@ -47,7 +47,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 }
                 else if (option == "2")
                 {
-                    Console.WriteLine("Selected enter via text file.");
+                    Console.WriteLine("Selected enter via text file." + "\n");
                     checker = true;                    
                     string file_path = Program_Input.file_Text_Input(); // Calls the input class with the intention of using file input
 

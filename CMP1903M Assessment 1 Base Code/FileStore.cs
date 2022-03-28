@@ -22,7 +22,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             try 
             {
                 // Gets keyboard characters from the text file
-                keyboard_symbols = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\Keyboard_Symbols.png"); 
+                keyboard_symbols = System.IO.File.ReadAllText(@"C:\Users\Local User\Documents\GitHub\OOP_Code_Review\Keyboard_Symbols.txt"); 
             }
             catch (Exception) 
             {
@@ -60,6 +60,10 @@ namespace CMP1903M_Assessment_1_Base_Code
                             word += 1;
                         }
                     }
+                    else 
+                    {
+                        continue;
+                    }
                 }
             
             }
@@ -67,13 +71,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             {
                 Console.WriteLine(e);
             }
-
-            // For loop that will output the long words to console
-            for (int j = 0; j < long_words.Length; j++) 
-            {
-                Console.WriteLine(long_words[j]);
-            }
-
+            
             file_make(ref long_words); // Calls the method, with long_words as a parameter
         }
 
@@ -87,7 +85,41 @@ namespace CMP1903M_Assessment_1_Base_Code
             {
                 text_file.WriteLine(word); // Writes the word to the text file
             }
-            Console.WriteLine("Long Word File Successfully Created");            
+            Console.WriteLine("Long Word File Successfully Created");
+
+            //Gives the user the option to view all of the long words that are in the text file
+            bool correct_input = false;
+            while (correct_input == false) //While loop will keep going until a valid input has been entered 
+            {
+                Console.WriteLine("Do you want to view the long words: Y/N");
+                var decision = Console.ReadLine();
+
+                if (decision == "Y" || decision == "y")
+                {
+                    correct_input = true;
+                    Console.Clear();
+                    // For loop that will output the long words to console
+                    for (int j = 0; j < long_words.Length; j++)
+                    {
+                        if (long_words[j].Contains("*")) 
+                        {
+                            break;                            
+                        }
+                        Console.WriteLine(long_words[j]);
+                    }
+
+                }
+                else if (decision == "N" || decision == "n")
+                {
+                    Console.WriteLine("You have chosen not to view the long words");
+                    correct_input = true;
+                }
+                else
+                {
+                    Console.WriteLine("Error: Invalid input, you need to input Y/N");
+                }
+            }
+            
         }
 
         // Method searches for the text file on the user's device

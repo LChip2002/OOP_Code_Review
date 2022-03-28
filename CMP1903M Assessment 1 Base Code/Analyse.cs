@@ -39,7 +39,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         {
             // Removes all characters from the input after an asterisk(*) has been found
             sentence_check = sentence_check.Remove(sentence_check.IndexOf("*") + 1); // Removes everything after the index location of the first asterisk
-            Console.WriteLine(sentence_check);            
+            Console.WriteLine(sentence_check+"\n");            
 
             // Calls the sentence_statistics method with sentence_check as a parameter
             int[] return_array = this.sentence_statistics(ref sentence_check); 
@@ -75,20 +75,18 @@ namespace CMP1903M_Assessment_1_Base_Code
             // Removes the spaces in between the words by concatonating the words together
             string trimmed_input = String.Concat(sentence_check.Where(c => !Char.IsWhiteSpace(c)));
 
-            // Works out and outputs the amount of characters without spaces are in the inputted sentence(s)
+            // Sets letter_counter variable to length so it can be used in the for loop below to remove unnecessary characters
             int input_letter_count = trimmed_input.Length;
 
-            // For loop to remove all punctuation and asterisks to get a more accurate character count
-            for (int x = 0; x < input_letter_count; x++) 
+            // For loop to remove all punctuation and asterisks from the counter to get a more accurate character count
+            for (int x = 0; x < trimmed_input.Length; x++) 
             {
-                Console.WriteLine(trimmed_input[x]);
+                // If the current character equals these values then 1 will be subtracted from the input_letter_count int
                 if (trimmed_input[x] == '.' || trimmed_input[x] == ',' || trimmed_input[x] == '*' || trimmed_input[x] == '?' || trimmed_input[x] == '!') 
                 {
-                    Console.WriteLine(trimmed_input[x]);
-                    input_letter_count -= 1;
+                    input_letter_count -= 1; // Takes 1 away from the counter
                 }
             }
-            Console.WriteLine(trimmed_input);
 
             // For loop works out number of vowels, consonants, numbers and other symbols in the sentence(s)
             for (int i = 0; i < sentence_check.Length; i++)
