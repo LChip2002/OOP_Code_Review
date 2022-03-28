@@ -36,10 +36,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             // Calls function that will calculate which letter/character appears the most in the input
             // Console output will come from the Analysis class method
             Analyse letter_freq = new Analyse();
-            letter_freq.letter_frequency(ref sentence_check); // Calls letter_frequency function in Analyse class   
-
-
-
+            letter_freq.letter_frequency(ref sentence_check); // Calls letter_frequency function in Analyse class
         }
 
     }

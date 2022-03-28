@@ -87,9 +87,9 @@ namespace CMP1903M_Assessment_1_Base_Code
             }
             Console.WriteLine("Long Word File Successfully Created");
 
-            //Gives the user the option to view all of the long words that are in the text file
+            // Gives the user the option to view all of the long words that are in the text file
             bool correct_input = false;
-            while (correct_input == false) //While loop will keep going until a valid input has been entered 
+            while (correct_input == false) // While loop will keep going until a valid input has been entered 
             {
                 Console.WriteLine("Do you want to view the long words: Y/N");
                 var decision = Console.ReadLine();
@@ -97,14 +97,20 @@ namespace CMP1903M_Assessment_1_Base_Code
                 if (decision == "Y" || decision == "y")
                 {
                     correct_input = true;
-                    Console.Clear();
+                    Console.Clear(); // Clears the console
+
                     // For loop that will output the long words to console
                     for (int j = 0; j < long_words.Length; j++)
                     {
-                        if (long_words[j].Contains("*")) 
+                        if (long_words[j] == "*")
                         {
-                            break;                            
+                            break; // Loop breaks if an asterisk is found 
                         }
+                        else if (long_words[j] == null) 
+                        {
+                            continue;
+                        }
+                        
                         Console.WriteLine(long_words[j]);
                     }
 
