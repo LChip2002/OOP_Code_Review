@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions; // Regex library used to be able to extract numbers from a string 
 using System.IO; // Allows access to files and directories
 
 namespace CMP1903M_Assessment_1_Base_Code
@@ -45,9 +46,11 @@ namespace CMP1903M_Assessment_1_Base_Code
                 // For loop to obtain words that have more than 7 characters
                 for (int i = 0; i < sentence_words.Length; i++)
                 {
+                    sentence_words[i] = Regex.Replace(sentence_words[i], @"[.,*/\!']", ""); //Removes unecessary characters from the words
                     // If statement checks if the word has a length greater than 7
                     if (sentence_words[i].Length > 7)
                     {
+                        
                         // If statement checks if word contains characters other than letters by comparing to ASCII table
                         if (!keyboard_symbols_array.Contains(sentence_words[i]))
                         {
@@ -131,8 +134,18 @@ namespace CMP1903M_Assessment_1_Base_Code
         // Method searches for the text file on the user's device
         private string symbol_file_search() 
         {
-            // Gets the full directory that the file is in on the user's device
-            string keyboard_symbols = System.IO.File.ReadAllText(Path.GetFullPath("Keyboard_Symbols.txt"));
+            string keyboard_symbols;
+            try 
+            {
+                // Gets the full directory that the file is in on the user's device
+                keyboard_symbols = System.IO.File.ReadAllText(Path.GetFullPath("Keyboard_Symbols.txt"));
+            }
+            catch (Exception) 
+            {
+                Console.WriteLine("Keyboard symbols file couldn't be opened, but characters should be removed via Regex.");
+                keyboard_symbols = ".,!?;:'*";
+            }
+            
             return keyboard_symbols;    
         }
     }

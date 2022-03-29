@@ -68,6 +68,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
             catch (Exception)
             {
+                Console.Clear();
                 Console.WriteLine("Original directory doesn't exist on device, searching for file now");
                 string file_path = file_search();
                 return file_path;
@@ -78,11 +79,26 @@ namespace CMP1903M_Assessment_1_Base_Code
         // Method searches for the text file on the user's device
         public override string file_search() //Overrides the base class method and gives body to the abstract method - example of data abstraction
         {
-            // Gets the full directory that the file is in on the user's device
-            string file_path = System.IO.File.ReadAllText(Path.GetFullPath("CMP1903M_Assessment_1_Test_File.txt")); 
-            Console.WriteLine(file_path);
-            return file_path;
+            string file_path;
             
+            // Exception Handling used if the GetFullPath fails, if so the user will then have to manually input the file directory
+            try 
+            {
+                // Gets the full directory that the file is in on the user's device
+                file_path = System.IO.File.ReadAllText(Path.GetFullPath("CMP1903M_Assessment_1_Test_File.txt"));
+                Console.WriteLine(file_path);
+                
+            }
+            catch (Exception)
+            {
+                //If it fails the user has to manually enter the file directory
+                Console.Clear();
+                Console.WriteLine("Search error, Please enter the directory of the text file manually"+"\n"+":");
+                file_path = Console.ReadLine()!;
+            }
+            return file_path;
+
+
         }
 
     }
