@@ -45,7 +45,6 @@ namespace CMP1903M_Assessment_1_Base_Code
                 manualTextInput(ref human_input); // Function is called again if there are no asterisks - example of recursion
             }
             
-            Console.WriteLine(human_input);
             return human_input;            
             
         }

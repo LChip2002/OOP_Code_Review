@@ -29,7 +29,6 @@ namespace CMP1903M_Assessment_1_Base_Code
             
                     // Calls the input class with the intention of using the physical input
                     string returned_human_input = Program_Input.manualTextInput(ref human_input);
-                    Console.WriteLine(returned_human_input);
 
                     // Calls the Analyse class with the intention of analysing the human input
                     string sentence_check = returned_human_input; // Human_input becomes the value of the sentence_check variable to be used in the Analysis class
